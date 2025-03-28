@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <style>
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        /* Add any custom CSS here */
+        body {
+            font-family: 'Poppins', sans-serif; /* Example custom font */
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans">
+
+    <!-- Dark Mode Toggle -->
+    <div class="absolute top-4 right-4">
+        <button id="darkModeToggle" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md focus:outline-none">
+            Toggle Dark Mode
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="py-24 bg-cover bg-center" style="background-image: url('images/hero-image.jpg')">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white shadow-md">Celebrating [GF/BF Name] & [Your Name]</h1>
+            <p class="text-lg md:text-xl text-gray-100 mb-8 shadow-md">Our love story, digitized.</p>
+            <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg">Explore Our Journey</button>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-8">Our Journey</h2>
+            <div class="relative">
+                <div class="absolute left-1/2 h-full border border-gray-300 dark:border-gray-600 transform -translate-x-1/2"></div>
+                <div class="timeline-container space-y-8">
+                    <!-- Timeline items will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons I Love You Section -->
+    <section id="reasons" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-8">Reasons I Love You</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Reason cards will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-8">Our Memories</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Image Gallery Items will be added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 dark:bg-gray-700 py-6 text-center">
+        <p class="text-gray-600 dark:text-gray-300">&copy; [Year] [Your Names]. Made with ❤️</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark Mode Toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+            });
+
+            // Timeline Data
+            const timelineData = [
+                { date: '2023-01-15', title: 'First Date', description: 'Our first magical date!', image: 'images/date1.jpg' },
+                { date: '2023-02-14', title: 'Valentine\'s Day', description: 'Our first Valentine\'s together!', image: 'images/valentine.jpg' },
+                { date: '2023-05-20', title: 'First Trip', description: 'Our first trip together to the mountains!', image: 'images/trip.jpg' }
+            ];
+
+            const timelineContainer = document.querySelector('.timeline-container');
+
+            timelineData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.classList.add('flex', 'items-center', 'mb-8', 'relative');
+
+                timelineItem.innerHTML = `
+                    <div class="absolute w-1/2 ${timelineData.indexOf(item) % 2 === 0 ? 'left-0' : 'right-0'}  text-right md:text-left">
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-64 mx-4">
+                            <h3 class="text-lg font-semibold">${item.title}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">${item.date}</p>
+                            <p class="mt-2">${item.description}</p>
+                        </div>
+                        <img src="${item.image}" alt="${item.title}" class="mt-2 rounded-md w-full h-48 object-cover">
+                    </div>
+                    <div class="rounded-full bg-pink-500 h-8 w-8 z-10 absolute top-1/2 transform -translate-y-1/2 ${timelineData.indexOf(item) % 2 === 0 ? 'right-1/2 translate-x-1/2' : 'left-1/2 -translate-x-1/2'}"></div>
+                `;
+
+                timelineContainer.appendChild(timelineItem);
+            });
+
+            // Reasons Data
+            const reasonsData = [
+                { reason: 'Your Smile', description: 'Your smile brightens my day.' },
+                { reason: 'Your Kindness', description: 'You are always so kind to everyone.' },
+                { reason: 'Your Humor', description: 'You always make me laugh.' }
+            ];
+
+            const reasonsContainer = document.querySelector('#reasons .grid');
+
+            reasonsData.forEach(item => {
+                const reasonCard = document.createElement('div');
+                reasonCard.classList.add('bg-white', 'dark:bg-gray-700', 'rounded-lg', 'shadow-md', 'p-6');
+
+                reasonCard.innerHTML = `
+                    <h3 class="text-xl font-semibold mb-2">${item.reason}</h3>
+                    <p class="text-gray-700 dark:text-gray-300">${item.description}</p>
+                `;
+
+                reasonsContainer.appendChild(reasonCard);
+            });
+
+            // Photo Gallery (Example: Add more images)
+            const galleryContainer = document.querySelector("#gallery .grid");
+            const galleryImages = [
+              "images/gallery1.jpg",
+              "images/gallery2.jpg",
+              "images/gallery3.jpg",
+              "images/gallery4.jpg",
+            ];
+
+            galleryImages.forEach((imageSrc) => {
+              const imgElement = document.createElement("img");
+              imgElement.src = imageSrc;
+              imgElement.alt = "Gallery Image";
+              imgElement.classList.add("w-full", "h-48", "object-cover", "rounded-md");
+              galleryContainer.appendChild(imgElement);
+            });
+        });
+    </script>
+</body>
+</html>
